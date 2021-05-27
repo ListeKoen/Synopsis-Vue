@@ -1,51 +1,39 @@
 <template>
   <div id="app">
-    <h1 class="ui dividing centered header">Vue.js Todo App</h1>
-    <div class='ui three column centered grid'>
-      <div class='column'>
-        <todo-list v-bind:todos="todos"></todo-list>
-        <create-todo v-on:create-todo="createTodo"></create-todo>
-      </div>
-    </div>
+    <TodoList />
   </div>
 </template>
 
 <script>
-import sweetalert from 'sweetalert';
-import TodoList from './components/TodoList';
-import CreateTodo from './components/CreateTodo';
+import Vue from "vue";
+import BootstrapVue from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import TodoList from './components/TodoList.vue';
+
+library.add(faCheck);
+
 export default {
   name: 'app',
   components: {
-    TodoList,
-    CreateTodo,
-  },
-  data() {
-    return {
-      todos: [{
-        title: 'Todo A',
-        project: 'Project A',
-        done: false,
-      }, {
-        title: 'Todo B',
-        project: 'Project B',
-        done: true,
-      }, {
-        title: 'Todo C',
-        project: 'Project C',
-        done: false,
-      }, {
-        title: 'Todo D',
-        project: 'Project D',
-        done: false,
-      }],
-    };
-  },
-  methods: {
-    createTodo(newTodo) {
-      this.todos.push(newTodo);
-      sweetalert('Success!', 'To-Do created!', 'success');
-    },
-  },
-};
+    TodoList
+  }
+}
+
+Vue.use(BootstrapVue);
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
